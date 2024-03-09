@@ -103,7 +103,7 @@ export const SidebarWrapper = styled.nav<SidebarWrapperProps>`
   .nav-item {
     position: relative;
 
-    padding: 0.6rem 1rem 1rem 2.1rem;
+    padding: 0.8rem 1rem 0.9rem 2.1rem;
     margin: 0.3rem 0;
 
     display: grid;
