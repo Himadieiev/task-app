@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import { GlobalProvider } from '@/app/context/globalProvider';
 
@@ -21,7 +22,12 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
     return null;
   }
 
-  return <GlobalProvider>{children}</GlobalProvider>;
+  return (
+    <GlobalProvider>
+      <Toaster />
+      {children}
+    </GlobalProvider>
+  );
 };
 
 export default ContextProvider;
