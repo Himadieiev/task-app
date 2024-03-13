@@ -23,10 +23,10 @@ const CreateContent = () => {
         setDate(e.target.value);
         break;
       case 'completed':
-        setCompleted(e.target.value);
+        setCompleted(e.target.checked);
         break;
       case 'important':
-        setImportant(e.target.value);
+        setImportant(e.target.checked);
         break;
       default:
         break;
@@ -37,6 +37,7 @@ const CreateContent = () => {
     e.preventDefault();
 
     const task = { title, description, date, completed, important };
+    console.log(task);
 
     try {
       const res = await axios.post('/api/tasks', task);

@@ -16,7 +16,7 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ title, description, date, isCompleted, id }: TaskItemProps) => {
-  const { theme } = useGlobalState();
+  const { theme, deleteTask } = useGlobalState();
 
   return (
     <TaskItemWrapper theme={theme}>
@@ -30,7 +30,9 @@ const TaskItem = ({ title, description, date, isCompleted, id }: TaskItemProps) 
           <button className="incomplete">Incomplete</button>
         )}
         <button className="edit">{edit}</button>
-        <button className="delete">{trash}</button>
+        <button className="delete" onClick={() => deleteTask(id)}>
+          {trash}
+        </button>
       </div>
     </TaskItemWrapper>
   );
