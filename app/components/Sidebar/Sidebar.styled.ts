@@ -18,6 +18,24 @@ export const SidebarWrapper = styled.nav<SidebarWrapperProps>`
   border: 2px solid ${p => p.theme.borderColor2};
   border-radius: 1rem;
 
+  .user-btn {
+    .cl-rootBox {
+      width: 100%;
+      height: 100%;
+
+      .cl-userButtonBox {
+        width: 100%;
+        height: 100%;
+
+        .cl-userButtonTrigger {
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+      }
+    }
+  }
+
   .profile {
     position: relative;
 
@@ -84,7 +102,8 @@ export const SidebarWrapper = styled.nav<SidebarWrapperProps>`
     > h1 {
       margin-left: 0.8rem;
 
-      font-size: clamp(1.2rem, 4vw, 1.4rem);
+      /* font-size: clamp(1.2rem, 4vw, 1.4rem); */
+      font-size: 16px;
       line-height: 100%;
     }
 

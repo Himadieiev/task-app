@@ -1,6 +1,6 @@
 'use client';
 
-import { useClerk } from '@clerk/nextjs';
+import { UserButton, useClerk, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -16,6 +16,8 @@ const Sidebar = () => {
   const { theme } = useGlobalState();
 
   const { signOut } = useClerk();
+  const { user } = useUser();
+  const { firstName, lastName, imageUrl } = user || { firstName: '', lastName: '', imageUrl: '' };
 
   const router = useRouter();
   const pathname = usePathname();
@@ -29,11 +31,13 @@ const Sidebar = () => {
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
-          <Image width={70} height={70} alt="profile" src="/avatar.jpg" />
+          <Image width={70} height={70} alt="profile" src={imageUrl} />
         </div>
-        <h1>
-          <span>Ruslan</span>
-          <span>Him</span>
+        <div className="user-btn absolute z-20 top-0 w-full h-full">
+          <UserButton />
+        </div>
+        <h1 className="capitalize">
+          {firstName} {lastName}
         </h1>
       </div>
       <ul className="nav-items">
