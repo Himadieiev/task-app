@@ -3,8 +3,10 @@
 import { useGlobalState } from '@/app/context/globalProvider';
 import TaskItem from '../TaskItem/TaskItem';
 import { plus } from '@/app/utils/Icons';
+import Modal from '../Modals/Modal/Modal';
 
 import { TasksWrapper } from './Tasks.styled';
+import CreateContent from '../Modals/CreateContent/CreateContent';
 
 interface TasksProps {
   title: string;
@@ -12,10 +14,12 @@ interface TasksProps {
 }
 
 const Tasks = ({ tasks, title }: TasksProps) => {
-  const { theme, isLoading } = useGlobalState();
+  const { theme, isLoading, openModal, isModalOpen } = useGlobalState();
 
   return (
     <TasksWrapper theme={theme}>
+      {isModalOpen && <Modal content={<CreateContent />} />}
+
       <h1>{title}</h1>
       {!isLoading ? (
         <div className="tasks grid">
@@ -29,7 +33,7 @@ const Tasks = ({ tasks, title }: TasksProps) => {
               id={task.id}
             />
           ))}
-          <button className="create-task">
+          <button className="create-task" onClick={openModal}>
             {plus}
             Add New Task
           </button>

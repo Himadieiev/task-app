@@ -4,12 +4,20 @@ import axios from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
+import { useGlobalState } from '@/app/context/globalProvider';
+import { plus } from '@/app/utils/Icons';
+import Button from '../../Button/Button';
+
+import { CreateContentWrapper } from './CreateContent.styled';
+
 const CreateContent = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [completed, setCompleted] = useState(false);
   const [important, setImportant] = useState(false);
+
+  const { theme, allTasks, closeModal } = useGlobalState();
 
   const handleChange = (name: string) => (e: any) => {
     switch (name) {
@@ -46,7 +54,11 @@ const CreateContent = () => {
         toast.error(res.data.error);
       }
 
-      toast.success('Task created successfully');
+      if (!res.data.error) {
+        toast.success('Task created successfully');
+        allTasks();
+        closeModal();
+      }
     } catch (error) {
       toast.error('Something went wrong.');
       console.log(error);
@@ -54,7 +66,7 @@ const CreateContent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <CreateContentWrapper onSubmit={handleSubmit} theme={theme}>
       <h1>Create a Task</h1>
       <div className="input-control">
         <label htmlFor="title">Title</label>
@@ -68,7 +80,7 @@ const CreateContent = () => {
         />
       </div>
       <div className="input-control">
-        <label htmlFor="description">DEscription</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           value={description}
@@ -103,12 +115,19 @@ const CreateContent = () => {
         />
       </div>
 
-      <div className="submit-btn">
-        <button type="submit">
-          <span>Submit</span>
-        </button>
+      <div className="submit-btn flex justify-end">
+        <Button
+          type="submit"
+          name="Create Task"
+          icon={plus}
+          padding={'0.8rem 2rem'}
+          borderRad={'0.8rem'}
+          fw={'500'}
+          fs={'1.2rem'}
+          background={'rgba(0, 163, 255)'}
+        />
       </div>
-    </form>
+    </CreateContentWrapper>
   );
 };
 
