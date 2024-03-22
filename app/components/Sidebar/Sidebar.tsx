@@ -7,13 +7,13 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { useGlobalState } from '@/app/context/globalProvider';
 import menu from '@/app/utils/menu';
-import { logout } from '@/app/utils/Icons';
+import { arrowLeft, bars, logout } from '@/app/utils/Icons';
 
 import { SidebarWrapper } from './Sidebar.styled';
 import Button from '../Button/Button';
 
 const Sidebar = () => {
-  const { theme } = useGlobalState();
+  const { theme, collapsed, collapseMenu } = useGlobalState();
 
   const { signOut } = useClerk();
   const { user } = useUser();
@@ -27,7 +27,10 @@ const Sidebar = () => {
   };
 
   return (
-    <SidebarWrapper theme={theme}>
+    <SidebarWrapper theme={theme} open={collapsed}>
+      <button className="toggle-nav" onClick={collapseMenu}>
+        {collapsed ? bars : arrowLeft}
+      </button>
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">

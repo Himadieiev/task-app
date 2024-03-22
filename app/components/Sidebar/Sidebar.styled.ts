@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface SidebarWrapperProps {
   theme: object;
+  open: boolean;
 }
 
 export const SidebarWrapper = styled.nav<SidebarWrapperProps>`
@@ -17,6 +18,37 @@ export const SidebarWrapper = styled.nav<SidebarWrapperProps>`
   background-color: ${p => p.theme.colorBg2};
   border: 2px solid ${p => p.theme.borderColor2};
   border-radius: 1rem;
+
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    z-index: 100;
+
+    height: calc(100vh - 2rem);
+
+    transform: ${p => (p.open ? 'translateX(-107%)' : 'translateX(0)')};
+    transition: all 0.3s cubic-bezier(0.53, 0.21, 0, 1);
+
+    .toggle-nav {
+      display: block !important;
+    }
+  }
+
+  .toggle-nav {
+    position: absolute;
+    right: -69px;
+    top: 1.8rem;
+
+    padding: 0.8rem 0.9rem;
+
+    display: none;
+
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: ${p => p.theme.colorBg2};
+    border-right: 2px solid ${p => p.theme.borderColor2};
+    border-top: 2px solid ${p => p.theme.borderColor2};
+    border-bottom: 2px solid ${p => p.theme.borderColor2};
+  }
 
   .user-btn {
     .cl-rootBox {
